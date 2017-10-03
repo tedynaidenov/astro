@@ -1,4 +1,10 @@
-/* https://en.wikipedia.org/wiki/Julian_day */
+/*  
+    Returns the Julian Day Number i.e. integer
+    number assigned to whole solar day starting
+    from 0h UT. Julian Day number 0 is 4713BC.
+
+    https://en.wikipedia.org/wiki/Julian_day 
+*/
 function dateToJDN( date) {
     if (!date || !(date instanceof Date))
         throw "Argument is not valid date";
@@ -16,8 +22,15 @@ function dateToJDN( date) {
         - 32045;
 }
 
-/* https://en.wikipedia.org/wiki/Julian_day */
-function datetoJD(date) {
+
+/* 
+    Returns the Julian Day which is JDN plus
+    fraction of the day since previous noon
+    in UT. 
+    https://en.wikipedia.org/wiki/Julian_day 
+
+*/
+function dateToJD(date) {
      if (!date || !(date instanceof Date))
         throw "Argument is not valid date";
 
@@ -27,12 +40,21 @@ function datetoJD(date) {
         + date.getSeconds()/86400;
 }
 
-// Month is zero based!
-if (datetoJD(new Date(2000, 0, 1, 12, 0, 0)) != 2451545)
-    throw "dateToJD test fail";
+function test_dateToJD() {
+    // Month is zero based!
+    if (dateToJD(new Date(2000, 0, 1, 12, 0, 0)) != 2451545)
+        throw "dateToJD test fail";
 
-if (datetoJD(new Date(1999, 0, 1, 0, 0, 0)) != 2451179.5)
-    throw "dateToJD test fail";
+    if (dateToJD(new Date(1999, 0, 1, 0, 0, 0)) != 2451179.5)
+        throw "dateToJD test fail";
 
-if (datetoJD(new Date(1987, 0, 27, 0, 0, 0)) != 2446822.5)
-    throw "dateToJD test fail";
+    if (dateToJD(new Date(1987, 0, 27, 0, 0, 0)) != 2446822.5)
+        throw "dateToJD test fail";
+
+    console.log("Testing dateToJD done!")
+}
+
+test_dateToJD();
+
+console.log(dateToJDN(new Date()));
+
